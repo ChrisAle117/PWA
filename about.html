@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWA Caché Mixta - Acerca de</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="theme-color" content="#3b82f6">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>ℹ️</text></svg>">
+</head>
+
+<body class="bg-gray-50 font-inter">
+    <!-- Navigation -->
+    <nav class="text-white shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <h1 class="text-xl font-bold">PWA Caché Mixta</h1>
+                <button id="hamburger"
+                    class="flex flex-col justify-center items-center w-10 h-10 rounded-xl bg-white bg-opacity-10 hover:bg-opacity-20 transition"
+                    aria-label="Abrir menú">
+                    <span class="block w-6 h-0.5 bg-white mb-1"></span>
+                    <span class="block w-6 h-0.5 bg-white mb-1"></span>
+                    <span class="block w-6 h-0.5 bg-white"></span>
+                </button>
+            </div>
+            <div id="mobile-menu" class="hidden flex-col space-y-2 mt-2">
+                <a href="index.html" class="px-4 py-2 rounded-xl bg-white bg-opacity-20 block">Home</a>
+                <a href="calendar.html"
+                    class="px-4 py-2 rounded-xl hover:bg-white hover:bg-opacity-15 block">Calendario</a>
+                <a href="form.html" class="px-4 py-2 rounded-xl hover:bg-white hover:bg-opacity-15 block">Formulario</a>
+                <a href="about.html" class="px-4 py-2 rounded-xl bg-white bg-opacity-20 block">Acerca de</a>
+            </div>
+        </div>
+    </nav>
+    <script>
+        // Hamburger menu logic
+        const hamburger = document.getElementById('hamburger');
+                        <header class="bg-blue-500 text-white p-4 text-center">
+                            <h1 class="text-lg md:text-2xl font-bold m-0">PWA Caché Mixta</h1>
+                            <nav class="mt-2 flex justify-center flex-wrap gap-4">
+                                <a href="index.html" class="underline text-white">Inicio</a>
+                                <a href="calendar.html" class="underline text-white">Calendario</a>
+                                <a href="form.html" class="underline text-white">Formulario</a>
+                                <a href="about.html" class="underline text-white">Acerca de</a>
+                            </nav>
+                        </header>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-blue-600 text-xl">👤</span>
+                            <div>
+                                <p class="text-sm text-gray-500">Nombre</p>
+                                <p class="font-semibold text-gray-800">Christopher Alexis Quintana Ruiz </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-3">
+                            <span class="text-green-600 text-xl">🎓</span>
+                            <div>
+                                <p class="text-sm text-gray-500">Carrera</p>
+                                <p class="font-semibold text-gray-800">Desarrollo de Aplicaciones Web</p>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="space-y-4">
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </main>
+
+
+
+    <script src="register.js"></script>
+    <script>
+        // Mostrar información del Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.ready.then(registration => {
+                console.log('Service Worker registrado correctamente:', registration);
+            });
+        }
+
+        // Animación simple para las tarjetas
+        document.addEventListener('DOMContentLoaded', function () {
+            const cards = document.querySelectorAll('.bg-white');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+    <script src="register.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="theme-color" content="#3b82f6">
+    <link rel="icon" type="image/png" href="imgs/icon-192.png">
+</head>
+<body class="bg-gray-50 font-inter">
+    <!-- Navigation -->
+    <!-- ...existing code... -->
+    <header class="bg-blue-500 text-white p-4 text-center">
+        <h1 class="text-lg md:text-2xl font-bold m-0">PWA Caché Mixta</h1>
+        <nav class="mt-2 flex justify-center flex-wrap gap-4">
+            <a href="index.html" class="underline text-white">Inicio</a>
+            <a href="calendar.html" class="underline text-white">Calendario</a>
+            <a href="form.html" class="underline text-white">Formulario</a>
+            <a href="about.html" class="underline text-white">Acerca de</a>
+        </nav>
+    </header>
+                 
+                </p>
+               
+            </div>
+
+            <!-- Features Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <div class="card group">
+                    <div class="text-6xl mb-6 transition-transform group-hover:scale-110">📅</div>
+                    <h3 class="text-2xl font-bold mb-3 bg-gradient-to-r from-purple-600 to-cyan-600 bg-clip-text text-transparent">Calendario</h3>
+                    <p class="text-slate-600 mb-6 leading-relaxed">Experiencia de calendario rica con FullCalendar. Estrategia Cache First para librerías externas.</p>
+                    <a href="calendar.html" class="btn btn-primary inline-flex items-center gap-2">
+                        Explorar Calendario
+                        <span class="transition-transform group-hover:translate-x-1">→</span>
+                    </a>
+                </div>
+
+                <div class="card group">
+                    <div class="text-6xl mb-6 transition-transform group-hover:scale-110">📝</div>
+                    <h3 class="text-2xl font-bold mb-3 bg-gradient-to-r from-cyan-600 to-amber-500 bg-clip-text text-transparent">Formulario</h3>
+                    <p class="text-slate-600 mb-6 leading-relaxed">Formularios interactivos con Select2. Optimización inteligente de librerías jQuery.</p>
+                    <a href="form.html" class="btn btn-primary inline-flex items-center gap-2">
+                        Probar Formulario
+                        <span class="transition-transform group-hover:translate-x-1">→</span>
+                    </a>
+                </div>
+
+                <div class="card group md:col-span-2 lg:col-span-1">
+                    <div class="text-6xl mb-6 transition-transform group-hover:scale-110">ℹ️</div>
+                    <h3 class="text-2xl font-bold mb-3 bg-gradient-to-r from-amber-500 to-purple-600 bg-clip-text text-transparent">Información</h3>
+                    <p class="text-slate-600 mb-6 leading-relaxed">Detalles del proyecto y estrategias implementadas. Cache Only para máxima velocidad.</p>
+                    <a href="about.html" class="btn btn-primary inline-flex items-center gap-2">
+                        Conocer Más
+                        <span class="transition-transform group-hover:translate-x-1">→</span>
+                    </a>
+                </div>
+            </div>
+
+       
+     
+        </div>
+    </main>
+
+
+    
+    <script>
+        // Animaciones y efectos visuales mejorados
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animación de aparición para las tarjetas
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 150);
+            });
+
+            // Notificación de bienvenida cuando el SW esté listo
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.ready.then(() => {
+                    setTimeout(() => {
+                        notificationSystem.show({
+                            title: '🎉 ¡Bienvenido!',
+                            message: 'La PWA está lista. Todas las funciones offline están activas.',
+                            type: 'success',
+                            duration: 4000
+                        });
+                    }, 1000);
+                });
+            }
+
+            // Efecto parallax sutil en el hero
+            const hero = document.querySelector('.text-center');
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const parallax = scrolled * 0.1;
+                hero.style.transform = `translateY(${parallax}px)`;
+            });
+        });
+    </script>
+
+    <script src="register.js"></script>
+    </body>
+    </html>

@@ -1,0 +1,27 @@
+{
+  "name": "PWA Caché Mixta - Estrategias de Caché",
+  "short_name": "CacheMixta",
+  "description": "Aplicación Web Progresiva que demuestra la implementación de estrategias mixtas de caché: Cache Only para App Shell y Cache First Network Fallback para recursos dinámicos",
+  "version": "1.0.0",
+  "start_url": "/PWA/",
+  "scope": "/PWA/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#3b82f6",
+  "background_color": "#f9fafb",
+  "categories": ["education", "productivity", "utilities"],
+  "lang": "es",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/PWA/imgs/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/PWA/imgs/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

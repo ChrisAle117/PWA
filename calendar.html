@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/main.min.css" rel="stylesheet">
+    <meta name="theme-color" content="#3b82f6">
+    <link rel="icon" href="/PWA/imgs/icon-192.png">
+</head>
+
+<body class="bg-white font-inter">
+    <header class="bg-blue-500 text-white p-4 text-center">
+        <h1 class="text-lg md:text-2xl font-bold m-0">Calendario</h1>
+        <nav class="mt-2 flex justify-center flex-wrap gap-4">
+            <a href="index.html" class="underline text-white">Inicio</a>
+            <a href="form.html" class="underline text-white">Formulario</a>
+            <a href="about.html" class="underline text-white">Acerca de</a>
+        </nav>
+    </header>
+    <main class="max-w-xl mx-auto my-8 p-4">
+        <div class="bg-white rounded-lg shadow p-4">
+            <div id="calendar"></div>
+        </div>
+    </main>
+
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+<script src="register.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const calendarEl = document.getElementById('calendar');
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            locale: 'es',
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            height: 'auto',
+            events: [
+                { title: 'Reunión de Equipo', date: '2025-10-15', color: '#3b82f6' },
+                { title: 'Presentación del Proyecto', date: '2025-10-20', color: '#10b981' },
+                { title: 'Entrega Final', date: '2025-10-25', color: '#f59e0b' },
+                { title: 'Evaluación PWA', start: '2025-10-13T10:00:00', end: '2025-10-13T12:00:00', color: '#8b5cf6' },
+                { title: 'Workshop Service Workers', date: '2025-10-18', color: '#ef4444' }
+            ],
+            eventClick: function(info) {
+                alert('Evento: ' + info.event.title + '\nFecha: ' + info.event.start.toLocaleString());
+            }
+        });
+        calendar.render();
+    });
+</script>
+</body>
+</html>

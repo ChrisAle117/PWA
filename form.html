@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWA Caché Mixta - Formulario</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Select2 CSS (Estrategia Cache First, Network Fallback) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet">
+    
+    <meta name="theme-color" content="#3b82f6">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+</head>
+<body class="bg-gray-50 font-inter">
+    <!-- Navigation -->
+    <nav class="text-white shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <h1 class="text-xl font-bold">PWA Caché Mixta</h1>
+                <button id="hamburger" class="flex flex-col justify-center items-center w-10 h-10 rounded-xl bg-white bg-opacity-10 hover:bg-opacity-20 transition" aria-label="Abrir menú">
+                    <span class="block w-6 h-0.5 bg-white mb-1"></span>
+                    <span class="block w-6 h-0.5 bg-white mb-1"></span>
+                    <span class="block w-6 h-0.5 bg-white"></span>
+                </button>
+            </div>
+            <div id="mobile-menu" class="hidden flex-col space-y-2 mt-2">
+                <a href="index.html" class="px-4 py-2 rounded-xl bg-white bg-opacity-20 block">Home</a>
+                <a href="calendar.html" class="px-4 py-2 rounded-xl hover:bg-white hover:bg-opacity-15 block">Calendario</a>
+                <a href="form.html" class="px-4 py-2 rounded-xl bg-white bg-opacity-20 block">Formulario</a>
+                <a href="about.html" class="px-4 py-2 rounded-xl hover:bg-white hover:bg-opacity-15 block">Acerca de</a>
+            </div>
+        </div>
+    </nav>
+    <script>
+    // Hamburger menu logic
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+        });
+    });
+    </script>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-12">
+                <div class="text-7xl mb-6 animate-pulse">📝</div>
+                <h2 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-600 to-amber-500 bg-clip-text text-transparent mb-4">
+                    Formulario 
+                </h2>
+            
+            </div>
+
+            <!-- Form Container -->
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <form id="demoForm" class="space-y-6">
+                    <!-- Información Personal -->
+                    <div class="border-b border-gray-200 pb-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">Información Personal</h3>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="nombre" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Nombre Completo
+                                </label>
+                                <input type="text" id="nombre" name="nombre" 
+                                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                       placeholder="Ingresa tu nombre completo">
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Email
+                                </label>
+                                <input type="email" id="email" name="email" 
+                                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                       placeholder="ejemplo@email.com">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Selects con Select2 -->
+                    <div class="space-y-6">
+                        <h3 class="text-xl font-semibold text-gray-800">Selecciones (Select2)</h3>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="pais" class="block text-sm font-medium text-gray-700 mb-2">
+                                    País
+                                </label>
+                                <select id="pais" name="pais" class="w-full">
+                                    <option value="">Selecciona un país</option>
+                                    <option value="ar">Argentina</option>
+                                    <option value="br">Brasil</option>
+                                    <option value="cl">Chile</option>
+                                    <option value="co">Colombia</option>
+                                    <option value="cr">Costa Rica</option>
+                                    <option value="ec">Ecuador</option>
+                                    <option value="es">España</option>
+                                    <option value="mx">México</option>
+                                    <option value="pe">Perú</option>
+                                    <option value="uy">Uruguay</option>
+                                    <option value="ve">Venezuela</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="tecnologias" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Tecnologías (Múltiple)
+                                </label>
+                                <select id="tecnologias" name="tecnologias[]" multiple class="w-full">
+                                    <option value="javascript">JavaScript</option>
+                                    <option value="typescript">TypeScript</option>
+                                    <option value="react">React</option>
+                                    <option value="vue">Vue.js</option>
+                                    <option value="angular">Angular</option>
+                                    <option value="nodejs">Node.js</option>
+                                    <option value="python">Python</option>
+                                    <option value="java">Java</option>
+                                    <option value="csharp">C#</option>
+                                    <option value="php">PHP</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="experiencia" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Nivel de Experiencia
+                                </label>
+                                <select id="experiencia" name="experiencia" class="w-full">
+                                    <option value="">Selecciona tu nivel</option>
+                                    <option value="junior">Junior (0-2 años)</option>
+                                    <option value="mid">Mid-level (2-5 años)</option>
+                                    <option value="senior">Senior (5+ años)</option>
+                                    <option value="lead">Team Lead/Architect</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="frameworks" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Frameworks Favoritos
+                                </label>
+                                <select id="frameworks" name="frameworks[]" multiple class="w-full">
+                                    <option value="bootstrap">Bootstrap</option>
+                                    <option value="tailwind">Tailwind CSS</option>
+                                    <option value="material">Material UI</option>
+                                    <option value="antd">Ant Design</option>
+                                    <option value="bulma">Bulma</option>
+                                    <option value="foundation">Foundation</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <main class="max-w-xl mx-auto my-8 p-4">
+                        <section class="text-center mb-6">
+                            <div class="text-6xl mb-2">📝</div>
+                            <h2 class="text-2xl font-bold">Formulario</h2>
+                            <p class="text-sm text-gray-600">Formulario simple y responsivo con Select2 opcional.</p>
+                        </section>
+
+                        <section class="bg-white rounded-lg shadow p-4">
+                            <form id="demoForm" class="space-y-4">
+                                <div>
+                                    <label for="nombre" class="form-label">Nombre</label>
+                                    <input id="nombre" name="nombre" class="form-control" type="text" placeholder="Tu nombre" required>
+                                </div>
+
+                                <div>
+                                    <label for="email" class="form-label">Email</label>
+                                    <input id="email" name="email" class="form-control" type="email" placeholder="tu@correo.com" required>
+                                </div>
+
+                                <div>
+                                    <label for="pais" class="form-label">País</label>
+                                    <select id="pais" name="pais" class="form-control">
+                                        <option value="">Selecciona un país</option>
+                                        <option value="ES">España</option>
+                                        <option value="MX">México</option>
+                                        <option value="CO">Colombia</option>
+                                    </select>
+                                </div>
+
+                                <div class="flex justify-between items-center">
+                                    <button type="submit" class="btn btn-primary">Enviar</button>
+                                    <button type="reset" id="resetForm" class="btn btn-secondary">Limpiar</button>
+                                </div>
+                            </form>
+                        </section>
+                    </main>
+
+
+    <!-- jQuery (Estrategia Cache First, Network Fallback) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- Select2 JS (Estrategia Cache First, Network Fallback) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const startTime = performance.now();
+            
+            // Inicializar Select2 cuando jQuery esté disponible
+            $(document).ready(function() {
+                // Configuración para select simple
+                $('#pais, #experiencia').select2({
+                    placeholder: 'Selecciona una opción',
+                    allowClear: true
+                });
+
+                // Configuración para select múltiple
+                $('#tecnologias').select2({
+                    placeholder: 'Selecciona tecnologías',
+                    allowClear: true
+                });
+
+                $('#frameworks').select2({
+                    placeholder: 'Selecciona frameworks',
+                    allowClear: true
+                });
+
+                // Verificar estado de las librerías
+                updateLibraryStatus();
+
+                // Calcular tiempo de carga
+                const endTime = performance.now();
+                const loadTime = Math.round(endTime - startTime);
+                $('#loadTime').text(loadTime + 'ms');
+
+                // Manejar envío del formulario
+                $('#demoForm').on('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const formData = {
+                        nombre: $('#nombre').val(),
+                        email: $('#email').val(),
+                        pais: $('#pais').val(),
+                        tecnologias: $('#tecnologias').val(),
+                        experiencia: $('#experiencia').val(),
+                        frameworks: $('#frameworks').val(),
+                        mensaje: $('#mensaje').val()
+                    };
+
+                    console.log('Datos del formulario:', formData);
+                    
+                    alert('¡Formulario enviado exitosamente!\n\nRevisa la consola para ver los datos.');
+                });
+
+                // Limpiar formulario
+                $('#resetForm').on('click', function() {
+                    $('#demoForm')[0].reset();
+                    $('#pais, #experiencia, #tecnologias, #frameworks').val(null).trigger('change');
+                });
+            });
+
+            function updateLibraryStatus() {
+                let jqueryCached = false;
+                let select2Cached = false;
+                
+                // Verificar jQuery
+                if (typeof jQuery !== 'undefined') {
+                    $('#jqueryStatus').text('✅');
+                } else {
+                    $('#jqueryStatus').text('❌');
+                }
+
+                // Verificar Select2
+                if (typeof $.fn.select2 !== 'undefined') {
+                    $('#select2Status').text('✅');
+                } else {
+                    $('#select2Status').text('❌');
+                }
+
+                // Verificar si vienen del caché
+                setTimeout(() => {
+                    const jqueryEntry = performance.getEntriesByName('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js')[0];
+                    if (jqueryEntry && jqueryEntry.transferSize === 0 && jqueryEntry.decodedBodySize > 0) {
+                        jqueryCached = true;
+                        $('#jqueryStatus').text('⚡');
+                    }
+
+                    const select2Entry = performance.getEntriesByName('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js')[0];
+                    if (select2Entry && select2Entry.transferSize === 0 && select2Entry.decodedBodySize > 0) {
+                        select2Cached = true;
+                        $('#select2Status').text('⚡');
+                    }
+                    
+                    // Mostrar notificación sobre el estado de las librerías
+                    const cachedLibs = [];
+                    if (jqueryCached) cachedLibs.push('jQuery');
+                    if (select2Cached) cachedLibs.push('Select2');
+                    
+                    if (cachedLibs.length > 0) {
+                        notificationSystem.show({
+                            title: 'Librerías desde caché',
+                            message: `${cachedLibs.join(' y ')} cargado desde caché local`,
+                            type: 'success',
+                            duration: 3000
+                        });
+                    } else {
+                        notificationSystem.show({
+                            title: 'Primera carga',
+                            message: 'Librerías descargadas desde CDN y guardadas en caché',
+                            type: 'info',
+                            duration: 4000
+                        });
+                    }
+                }, 100);
+            }
+        });
+    </script>
+
+    <script src="register.js"></script>
+    </body>
+    </html>
