@@ -3,59 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendario</title>
+    <title>PWA Caché Mixta - Calendario</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/main.min.css" rel="stylesheet">
+    
     <meta name="theme-color" content="#3b82f6">
-    <link rel="icon" href="/PWA/imgs/icon-192.png">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📅</text></svg>">
+        <script src="register.js"></script>
 </head>
+<body class="bg-gray-50 font-inter">
+    <!-- Navigation -->
+    <nav class="text-white shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <h1 class="text-xl font-bold">PWA Caché Mixta</h1>
+                <button id="hamburger" class="flex flex-col justify-center items-center w-10 h-10 rounded-xl bg-white bg-opacity-10 hover:bg-opacity-20 transition" aria-label="Abrir menú">
+                    <span class="block w-6 h-0.5 bg-white mb-1"></span>
+                    <span class="block w-6 h-0.5 bg-white mb-1"></span>
+                    <span class="block w-6 h-0.5 bg-white"></span>
+                </button>
+            </div>
+            <div id="mobile-menu" class="hidden flex-col space-y-2 mt-2">
+                <a href="index.html" class="px-4 py-2 rounded-xl bg-white bg-opacity-20 block">Home</a>
+                <a href="calendar.html" class="px-4 py-2 rounded-xl bg-white bg-opacity-20 block">Calendario</a>
+                <a href="form.html" class="px-4 py-2 rounded-xl hover:bg-white hover:bg-opacity-15 block">Formulario</a>
+                <a href="about.html" class="px-4 py-2 rounded-xl hover:bg-white hover:bg-opacity-15 block">Acerca de</a>
+            </div>
+        </div>
+    </nav>
+    <script>
+    // Hamburger menu logic
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+        });
+    });
+    </script>
 
-<body class="bg-white font-inter">
-    <header class="bg-blue-500 text-white p-4 text-center">
-        <h1 class="text-lg md:text-2xl font-bold m-0">Calendario</h1>
-        <nav class="mt-2 flex justify-center flex-wrap gap-4">
-            <a href="index.html" class="underline text-white">Inicio</a>
-            <a href="form.html" class="underline text-white">Formulario</a>
-            <a href="about.html" class="underline text-white">Acerca de</a>
-        </nav>
-    </header>
-    <main class="max-w-xl mx-auto my-8 p-4">
-        <div class="bg-white rounded-lg shadow p-4">
-            <div id="calendar"></div>
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-6xl mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-12">
+                <div class="text-7xl mb-6 animate-pulse">📅</div>
+                <h2 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-cyan-500 bg-clip-text text-transparent mb-4">
+                    Calendario 
+                </h2>
+         
+            </div>
+
+            <!-- Calendar Container -->
+            <div class="card mb-8">
+                <div id="calendar" class="rounded-xl overflow-hidden"></div>
+            </div>
+
+     
         </div>
     </main>
 
 
-</body>
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
-<script src="register.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const calendarEl = document.getElementById('calendar');
-        const calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            locale: 'es',
-            headerToolbar: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'dayGridMonth,timeGridWeek,timeGridDay'
-            },
-            height: 'auto',
-            events: [
-                { title: 'Reunión de Equipo', date: '2025-10-15', color: '#3b82f6' },
-                { title: 'Presentación del Proyecto', date: '2025-10-20', color: '#10b981' },
-                { title: 'Entrega Final', date: '2025-10-25', color: '#f59e0b' },
-                { title: 'Evaluación PWA', start: '2025-10-13T10:00:00', end: '2025-10-13T12:00:00', color: '#8b5cf6' },
-                { title: 'Workshop Service Workers', date: '2025-10-18', color: '#ef4444' }
-            ],
-            eventClick: function(info) {
-                alert('Evento: ' + info.event.title + '\nFecha: ' + info.event.start.toLocaleString());
+    <!-- FullCalendar JS (Estrategia Cache First, Network Fallback) -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+    <script src="register.js"></script>
+
+    <!--Calendario fechas-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const startTime = performance.now();
+            
+            const calendarEl = document.getElementById('calendar');
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: 'es',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                height: 'auto',
+                events: [
+                    {
+                        title: 'Reunión de Equipo',
+                        date: '2025-10-15',
+                        color: '#3b82f6'
+                    },
+                    {
+                        title: 'Presentación del Proyecto',
+                        date: '2025-10-20',
+                        color: '#10b981'
+                    },
+                    {
+                        title: 'Entrega Final',
+                        date: '2025-10-25',
+                        color: '#f59e0b'
+                    },
+                    {
+                        title: 'Evaluación PWA',
+                        start: '2025-10-13T10:00:00',
+                        end: '2025-10-13T12:00:00',
+                        color: '#8b5cf6'
+                    },
+                    {
+                        title: 'Workshop Service Workers',
+                        date: '2025-10-18',
+                        color: '#ef4444'
+                    }
+                ],
+                eventClick: function(info) {
+                    alert('Evento: ' + info.event.title + '\nFecha: ' + info.event.start.toDateString());
+                },
+                dateClick: function(info) {
+                    console.log('Fecha seleccionada: ' + info.dateStr);
+                }
+            });
+
+            calendar.render();
+
+            // Mostrar tiempo de carga y estado
+            const endTime = performance.now();
+            const loadTime = Math.round(endTime - startTime);
+            console.log('Tiempo de carga del calendario:', loadTime + 'ms');
+            
+            // Verificar si las librerías vienen del caché
+            let fromCache = false;
+            if (performance.getEntriesByName('https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js').length > 0) {
+                const entry = performance.getEntriesByName('https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js')[0];
+                fromCache = entry.transferSize === 0 && entry.decodedBodySize > 0;
+            }
+            
+            // Mostrar estado del caché en consola
+            if (fromCache) {
+                console.log('⚡ FullCalendar cargado desde caché local');
+            } else {
+                console.log('🌐 FullCalendar descargado desde CDN');
             }
         });
-        calendar.render();
-    });
-</script>
+    </script>
 </body>
 </html>

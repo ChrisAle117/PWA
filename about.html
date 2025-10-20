@@ -12,6 +12,7 @@
     <meta name="theme-color" content="#3b82f6">
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>ℹ️</text></svg>">
+        <script src="register.js"></script>
 </head>
 
 <body class="bg-gray-50 font-inter">
@@ -40,15 +41,41 @@
     <script>
         // Hamburger menu logic
         const hamburger = document.getElementById('hamburger');
-                        <header class="bg-blue-500 text-white p-4 text-center">
-                            <h1 class="text-lg md:text-2xl font-bold m-0">PWA Caché Mixta</h1>
-                            <nav class="mt-2 flex justify-center flex-wrap gap-4">
-                                <a href="index.html" class="underline text-white">Inicio</a>
-                                <a href="calendar.html" class="underline text-white">Calendario</a>
-                                <a href="form.html" class="underline text-white">Formulario</a>
-                                <a href="about.html" class="underline text-white">Acerca de</a>
-                            </nav>
-                        </header>
+        const mobileMenu = document.getElementById('mobile-menu');
+        hamburger.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-16">
+                <div class="relative inline-block">
+                    <div class="text-8xl mb-6 animate-pulse">👨‍💻</div>
+                    <div
+                        class="absolute -top-4 -right-4 w-6 h-6 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full animate-ping">
+                    </div>
+                </div>
+                <h2
+                    class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-amber-500 to-purple-600 bg-clip-text text-transparent mb-6">
+                    Proyecto
+                </h2>
+                <p class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+                    Practica de <strong class="text-purple-600">OnlyCache</strong>
+
+                </p>
+            </div>
+
+            <!-- Student Info -->
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Información del Estudiante</h3>
 
                 <div class="grid md:grid-cols-2 gap-8">
                     <div class="space-y-4">
